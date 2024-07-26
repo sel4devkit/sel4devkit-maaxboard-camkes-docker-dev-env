@@ -126,3 +126,15 @@ Two alternative Docker Images provide a user environment:
 * __User Dev__: Extends Dep, to provide an environment for user "developer".
 * __User Me__: Extends Dep, to provide an environment tailored for the
   invoking user.
+
+## Distribution and Compiler Toolchain
+
+The CAmkES Toolchain is currently tied to the GCC 10 Compiler Toolchain. The
+coupling is being investigated under the following Issue:
+* https://github.com/seL4/musllibc/issues/19
+
+Given this constraint, we provision an earlier Distribution (Debian Bullseye),
+and its default provision of needed 64-bit Compilers and 64-bit
+Cross-Compilers:
+* GCC 10 (64-bit AMD64)
+* GCC 10 (64-bit AArch64 (Also known as: ARM64))
