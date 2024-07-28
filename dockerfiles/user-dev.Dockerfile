@@ -33,6 +33,14 @@ RUN usermod --append --groups "sudo" "developer"
 ARG USER_NAME="developer"
 ARG GROUP_NAME="developer"
 
+ARG SCRIPT=user-python.sh
+COPY scripts/${SCRIPT} /tmp/${SCRIPT}
+RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
+
+ARG SCRIPT=user-haskell.sh
+COPY scripts/${SCRIPT} /tmp/${SCRIPT}
+RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
+
 ARG SCRIPT=user-home.sh
 COPY scripts/${SCRIPT} /tmp/${SCRIPT}
 RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
@@ -45,9 +53,14 @@ ARG SCRIPT=user-start.sh
 COPY scripts/${SCRIPT} /tmp/${SCRIPT}
 RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
 
+ARG SCRIPT=user-info.sh
+COPY scripts/${SCRIPT} /tmp/${SCRIPT}
+RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
+
 #===========================================================
 # Environment
 #===========================================================
+ENV STACK_ROOT="/util/haskell/stack"
 ENV STAMP_USER_DEV="${STAMP_NAME} (${STAMP_DATE})"
 
 #===========================================================

@@ -40,6 +40,14 @@ ARG USER_NAME=${HOST_USER_NAME}
 ARG GROUP_NAME=${HOST_GROUP_NAME}
 ARG LOCAL_LANG=${HOST_LOCAL_LANG}
 
+ARG SCRIPT=user-python.sh
+COPY scripts/${SCRIPT} /tmp/${SCRIPT}
+RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
+
+ARG SCRIPT=user-haskell.sh
+COPY scripts/${SCRIPT} /tmp/${SCRIPT}
+RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
+
 ARG SCRIPT=user-home.sh
 COPY scripts/${SCRIPT} /tmp/${SCRIPT}
 RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
@@ -56,9 +64,14 @@ ARG SCRIPT=user-me-locale.sh
 COPY scripts/${SCRIPT} /tmp/${SCRIPT}
 RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
 
+ARG SCRIPT=user-info.sh
+COPY scripts/${SCRIPT} /tmp/${SCRIPT}
+RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
+
 #===========================================================
 # Environment
 #===========================================================
+ENV STACK_ROOT="/util/haskell/stack"
 ENV STAMP_USER_ME="${STAMP_NAME} (${STAMP_DATE})"
 
 #===========================================================

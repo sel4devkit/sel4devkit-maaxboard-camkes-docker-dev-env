@@ -25,7 +25,6 @@ ARG STAMP_DATE
 RUN apt-get update -q
 
 ARG DEBIAN_FRONTEND=noninteractive
-
 RUN apt-get install -y --no-install-recommends build-essential
 RUN apt-get install -y --no-install-recommends ccache
 RUN apt-get install -y --no-install-recommends cmake
@@ -51,25 +50,8 @@ RUN apt-get clean autoclean
 RUN apt-get autoremove --purge --yes
 
 #===========================================================
-# Scripts
-#===========================================================
-ARG SCRIPT=dep-python.sh
-COPY scripts/${SCRIPT} /tmp/${SCRIPT}
-RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
-
-ARG SCRIPT=dep-haskell.sh
-COPY scripts/${SCRIPT} /tmp/${SCRIPT}
-RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
-
-ARG SCRIPT=dep-version.sh
-COPY scripts/${SCRIPT} /tmp/${SCRIPT}
-RUN --mount=type=ssh /bin/bash --login /tmp/${SCRIPT}
-
-#===========================================================
 # Environment
 #===========================================================
-
-ENV STACK_ROOT="/util/haskell/stack"
 ENV STAMP_DEP="${STAMP_NAME} (${STAMP_DATE})"
 
 ################################################################################
