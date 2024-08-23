@@ -21,7 +21,7 @@ chown "${USER_NAME}:${GROUP_NAME}" "/util/haskell/init"
 git clone "git@github.com:seL4/capdl.git" "/util/haskell/init/capdl"
 chown -R "${USER_NAME}:${GROUP_NAME}" "/util/haskell/init/capdl"
 export STACK_ROOT="/util/haskell/stack"
-sudo -u "${USER_NAME}" --preserve-env=STACK_ROOT make -C "/util/haskell/init/capdl/capDL-tool" sandbox
+sudo -u "${USER_NAME}" --preserve-env=STACK_ROOT make -C "/util/haskell/init/capdl/capDL-tool"
 rm -rf "/util/haskell/init"
 
 ################################################################################
